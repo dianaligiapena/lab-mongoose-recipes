@@ -19,7 +19,8 @@ mongoose
     return Recipe.create(newRecipe);
   })
   .then((result) => {
-    console.log(`recipe added: ${result.title}`) 
+    console.log(`recipe added: ${result.title}`);
+    return Recipe.insertMany(data);
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
