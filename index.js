@@ -26,6 +26,15 @@ mongoose
     result.forEach((item) => console.log(`recipe for ${item.title} inserted successfully`));
     return Recipe.findOneAndUpdate({ title: "Rigatoni alla Genovese" }, { duration: 100 }, { new:true })
   })
+  .then((result) => {
+    console.log(`The recipe ${result.title} is updated`);
+    return Recipe.findOneAndDelete({ title: "Carrot Cake" });
+  })
+  .then((result) => {
+    console.log(`The recipe ${result.title} is deleted`);
+    return mongoose.connection.close();
+  })
+  .then(() => console.log(`connection closed`))
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
