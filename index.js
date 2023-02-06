@@ -22,6 +22,10 @@ mongoose
     console.log(`recipe added: ${result.title}`);
     return Recipe.insertMany(data);
   })
+  .then((result) => {
+    result.forEach((item) => console.log(`recipe for ${item.title} inserted successfully`));
+    return Recipe.findOneAndUpdate({ title: "Rigatoni alla Genovese" }, { duration: 100 }, { new:true })
+  })
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
